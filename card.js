@@ -47,7 +47,7 @@ $(function() {
                 data['public_repos'],
                 "Repositories")
             .css("left", 122);
-        var streak = create_stats_div("107","Streak")
+        var streak = create_stats_div("0","Streak")
             .css("left", 186);
         var followers = create_stats_div(
                 data['followers'],
