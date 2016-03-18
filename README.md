@@ -6,10 +6,10 @@
 Include the following html code where you want the card to show up:
 ```html
 <div id="github-card">github-username</div>
-´´´
+```
 An example for Octocat:
 ```html
 <div id="github-card">octocat</div>
-´´´
+```
 ## Contribute
 Feel free to contribute pull requests
