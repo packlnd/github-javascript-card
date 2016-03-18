@@ -1,2 +1,6 @@
 # github-javascript-card
-:octocat: Provides summarized github user information
+![](http://i.imgur.com/9gVeNjv.jpg)
+## How to use
+...
+## Contribute
+...
