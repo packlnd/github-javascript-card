@@ -42,10 +42,14 @@ $(function() {
             .css("margin",0)
             .css("font-size","14px")
             .css("color", "#666");
+        var streak = create_stats_div(
+                "",
+                "Streak")
+            .css("left", 122);
         var repo = create_stats_div(
                 data['public_repos'],
                 "Repositories")
-            .css("left", 122);
+            .css("left", 186);
         var followers = create_stats_div(
                 data['followers'],
                 "Followers")
@@ -64,6 +68,7 @@ $(function() {
             .append(name)
             .append(uname)
             .append(repo)
+            .append(streak)
             .append(followers);
     }
 
