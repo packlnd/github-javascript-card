@@ -51,10 +51,10 @@ $(function() {
                 "Followers")
             .css("left", 250);
         $.post({
-            url: "https://shrouded-oasis-42259.herokuapp.com/github_streak",
-            data: data['html_url'],
-            dataType: "username=text",
+            url: "https://shrouded-oasis-42259.herokuapp.com/github_streak/" + data['html_url'],
+            dataType: "text",
             success: function(st_len) {
+                console.log(st_len);
                 var streak = create_stats_div(st_len,"Streak")
                     .css("left", 186);
                 card.append(streak);
