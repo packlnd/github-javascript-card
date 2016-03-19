@@ -53,9 +53,9 @@ app = Flask(__name__)
 def index():
     return '<h1>GitHub card web server</h1>'
 
-@app.route('/github_streak/<url>', methods=['GET', 'OPTIONS'])
+@app.route('/github_streak/<uname>', methods=['GET', 'OPTIONS'])
 @crossdomain(origin='*')
-def github_streak(url):
+def github_streak(uname):
     return url, 200
 
 if __name__ == "__main__":

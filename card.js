@@ -51,7 +51,7 @@ $(function() {
                 "Followers")
             .css("left", 250);
         $.post({
-            url: "https://shrouded-oasis-42259.herokuapp.com/github_streak/" + data['html_url'],
+            url: "https://shrouded-oasis-42259.herokuapp.com/github_streak/" + data['login'],
             dataType: "text",
             success: function(st_len) {
                 console.log(st_len);
