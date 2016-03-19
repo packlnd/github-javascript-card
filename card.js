@@ -51,8 +51,9 @@ $(function() {
                 "Followers")
             .css("left", 250);
         $.get({
-            url: "https://shrouded-oasis-42259.herokuapp.com/github_streak/" + data['login'],
-            dataType: "text",
+            url: "https://shrouded-oasis-42259.herokuapp.com/github_streak",
+            data: {uname: data['login']},
+            dataType: "json",
             success: function(st_len) {
                 console.log(st_len);
                 var streak = create_stats_div(st_len,"Streak")
