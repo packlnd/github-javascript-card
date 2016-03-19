@@ -6,7 +6,8 @@ app = Flask(__name__)
 def index():
     return '<h1>GitHub card web server</h1>'
 
-@app.route('/github_streak', methods=['POST'])
+@app.route('/github_streak', methods=['POST', 'OPTIONS'])
+@crossdomain(origin='*')
 def github_streak():
     return request.data
 
