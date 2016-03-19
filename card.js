@@ -42,22 +42,28 @@ $(function() {
             .css("margin",0)
             .css("font-size","14px")
             .css("color", "#666");
-        card.append(name);
         var repo = create_stats_div(
                 data['public_repos'],
                 "Repositories")
             .css("left", 122);
-        var streak = create_stats_div("0","Streak")
-            .css("left", 186);
         var followers = create_stats_div(
                 data['followers'],
                 "Followers")
             .css("left", 250);
+        $.post({
+            url: ,
+            data: data['html_url'],
+            dataType: "text",
+            success: function(st_len) {
+                var streak = create_stats_div(st_len,"Streak")
+                    .css("left", 186);
+                card.append(streak);
+            }
+        });
         card.html(img)
             .append(name)
             .append(uname)
             .append(repo)
-            .append(streak)
             .append(followers);
     }
 
