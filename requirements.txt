@@ -1,15 +1,10 @@
-BeautifulSoup==3.2.1
 cycler==0.10.0
-Cython==0.23.4
 Flask==0.10.1
-h5py==2.5.0
 itsdangerous==0.24
 Jinja2==2.8
 Keras==0.3.2
 Mako==1.0.4
 MarkupSafe==0.23
-matplotlib==1.5.1
-numpy==1.10.4
 Pillow==3.1.1
 PyHAML==1.1.0
 pyparsing==2.1.0
