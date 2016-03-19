@@ -50,11 +50,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 @app.route('/')
 @crossdomain(origin='*', methods=['GET'])
 def index():
-    return request.args.get('uname', '')
-
-@app.route('/github_streak', methods=['GET'])
-@crossdomain(origin='*', methods=['GET'])
-def github_streak(uname):
+    #return request.args.get('uname', '')
     return "9"
 
 if __name__ == "__main__":
