@@ -16,4 +16,3 @@ requests==2.9.1
 six==1.10.0
 virtualenv==14.0.6
 Werkzeug==0.11.4
-gunicorn
