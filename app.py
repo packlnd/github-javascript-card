@@ -48,7 +48,7 @@ def crossdomain(origin=None, methods=None, headers=None,
     return decorator
 
 @app.route('/')
-@crossdomain(origin='*')
+@crossdomain(origin='*', methods=['GET'])
 def index():
     return '<h1>GitHub card web server</h1>'
 
