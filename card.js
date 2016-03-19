@@ -18,7 +18,8 @@ $(function() {
 
     function draw_card(data) {
         $.get({
-            url: "https://shrouded-oasis-42259.herokuapp.com",
+            //url: "https://shrouded-oasis-42259.herokuapp.com",
+            url: "http://127.0.0.1:5000",
             data: {uname: data['login']},
             success: function(st_len) {
                 var streak = create_stats_div(st_len,"Streak")

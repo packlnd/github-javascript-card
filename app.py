@@ -48,6 +48,7 @@ def crossdomain(origin=None, methods=None, headers=None,
     return decorator
 
 def get_streak(uname):
+    return "123"
     page = requests.get('http://github.com/' + uname)
     tree = html.fromstring(page.content)
     streak = tree.xpath('//span[@class="contrib-number"]/text()')
