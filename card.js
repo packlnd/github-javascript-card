@@ -50,7 +50,7 @@ $(function() {
                 data['followers'],
                 "Followers")
             .css("left", 250);
-        $.post({
+        $.get({
             url: "https://shrouded-oasis-42259.herokuapp.com/github_streak/" + data['login'],
             dataType: "text",
             success: function(st_len) {
