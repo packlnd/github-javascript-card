@@ -52,7 +52,7 @@ $(function() {
             .css("left", 250);
         $.get({
             url: "https://shrouded-oasis-42259.herokuapp.com",
-            data: {uname: data['login'],
+            data: {uname: data['login']},
             success: function(st_len) {
                 console.log(st_len);
                 var streak = create_stats_div(st_len,"Streak")
