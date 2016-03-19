@@ -2,7 +2,11 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/github_streak')
+@app.route('/')
+def index():
+    return '<h1>GitHub card web server</h1>'
+
+@app.route('/github_streak', methods=['POST'])
 def github_streak():
     return request.data
 
