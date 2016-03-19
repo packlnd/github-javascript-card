@@ -50,7 +50,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 @app.route('/')
 @crossdomain(origin='*', methods=['GET'])
 def index():
-    return '<h1>GitHub card web server</h1>'
+    return '<h1>' + request.data + '</h1>'
 
 @app.route('/github_streak', methods=['GET', 'OPTIONS'])
 @crossdomain(origin='*')
