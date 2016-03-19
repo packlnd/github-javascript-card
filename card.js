@@ -17,6 +17,15 @@ $(function() {
     }
 
     function draw_card(data) {
+        $.get({
+            url: "https://shrouded-oasis-42259.herokuapp.com",
+            data: {uname: data['login']},
+            success: function(st_len) {
+                var streak = create_stats_div(st_len,"Streak")
+                    .css("left", 186);
+                card.append(streak);
+            }
+        });
         var card = $("#github-card")
             .width(300).height(100)
             .css("font-family", "Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'")
@@ -42,33 +51,18 @@ $(function() {
             .css("margin",0)
             .css("font-size","14px")
             .css("color", "#666");
-        var streak = create_stats_div(
-                "",
-                "Streak")
-            .css("left", 122);
         var repo = create_stats_div(
                 data['public_repos'],
                 "Repositories")
-            .css("left", 186);
+            .css("left", 122);
         var followers = create_stats_div(
                 data['followers'],
                 "Followers")
             .css("left", 250);
-        $.get({
-            url: "https://shrouded-oasis-42259.herokuapp.com",
-            data: {uname: data['login']},
-            success: function(st_len) {
-                console.log(st_len);
-                var streak = create_stats_div(st_len,"Streak")
-                    .css("left", 186);
-                card.append(streak);
-            }
-        });
         card.html(img)
             .append(name)
             .append(uname)
             .append(repo)
-            .append(streak)
             .append(followers);
     }
 

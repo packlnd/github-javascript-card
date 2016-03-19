@@ -47,11 +47,16 @@ def crossdomain(origin=None, methods=None, headers=None,
         return update_wrapper(wrapped_function, f)
     return decorator
 
+def get_streak(uname):
+    page = requests.get('http://github.com/' + uname)
+    tree = html.fromstring(page.content)
+    streak = tree.xpath('//span[@class="contrib-number"]/text()')
+    return streak
 @app.route('/')
 @crossdomain(origin='*', methods=['GET'])
 def index():
-    #return request.args.get('uname', '')
-    return "9"
+    uname = request.args.get('uname', '')
+    return get_streak(uname)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
