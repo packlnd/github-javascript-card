@@ -5,13 +5,11 @@ $(function() {
 
     function call_github_api(uname) {
         var url = "https://api.github.com/users/" + uname;
-        console.log(url);
         $.getJSON({
             url: url,
             success: function(data) {
                 jdata = JSON.stringify(data);
                 draw_card(data);
-                //$("#github-card").html(jdata);
             }
         });
     }
@@ -19,7 +17,6 @@ $(function() {
     function draw_card(data) {
         $.get({
             url: "https://shrouded-oasis-42259.herokuapp.com",
-            //url: "http://127.0.0.1:5000",
             data: {uname: data['login']},
             success: function(obj) {
                 var streak = create_stats_div(obj['data'],"Streak")
