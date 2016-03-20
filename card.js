@@ -18,12 +18,11 @@ $(function() {
 
     function draw_card(data) {
         $.get({
-            //url: "https://shrouded-oasis-42259.herokuapp.com",
-            url: "http://127.0.0.1:5000",
+            url: "https://shrouded-oasis-42259.herokuapp.com",
+            //url: "http://127.0.0.1:5000",
             data: {uname: data['login']},
             success: function(obj) {
-                var st_len = obj['data'];
-                var streak = create_stats_div(st_len,"Streak")
+                var streak = create_stats_div(obj['data'],"Streak")
                     .css("left", 186);
                 card.append(streak);
             }
