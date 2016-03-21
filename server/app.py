@@ -7,6 +7,7 @@ import requests
 from lxml import html
 from flask.ext.cors import CORS
 from flask.json import jsonify
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +23,13 @@ def index():
     uname = request.args.get('uname', '')
     streak = get_streak(uname)
     return jsonify({'data': streak, 'status': 200})
+
+@app.route('/twitter')
+def twitter():
+    config = None
+    with open('data.json') as data_file:
+        config = json.load(data_file)
+    return config
 
 if __name__ == "__main__":
     app.debug = True
