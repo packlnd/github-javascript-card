@@ -8,7 +8,7 @@ from flask.ext.cors import CORS
 from flask.json import jsonify
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 CORS(app)
 
 def get_streak(uname):
