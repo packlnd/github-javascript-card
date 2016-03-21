@@ -31,7 +31,7 @@ def twitter():
     fp = os.path.join(SITE_ROOT, 'config.json')
     with open(fp) as data_file:
         config = json.load(data_file)
-    return config
+    return jsonify(config)
 
 if __name__ == "__main__":
     app.debug = True
