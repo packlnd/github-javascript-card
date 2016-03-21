@@ -7,6 +7,7 @@ from lxml import html
 from flask.ext.cors import CORS
 from flask.json import jsonify
 import json
+import os
 
 app = Flask(__name__, static_url_path='')
 CORS(app)
@@ -25,8 +26,10 @@ def index():
 
 @app.route('/twitter')
 def twitter():
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     config = None
-    with open(url_for('static', filename='config.json')) as data_file:
+    fp = os.path.join(SITE_ROOT, 'config.json')
+    with open(fp) as data_file:
         config = json.load(data_file)
     return config
 
