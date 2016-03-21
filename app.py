@@ -27,7 +27,7 @@ def index():
 @app.route('/twitter')
 def twitter():
     config = None
-    with open('data.json') as data_file:
+    with open(url_for('static', 'config.json')) as data_file:
         config = json.load(data_file)
     return config
 
