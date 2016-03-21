@@ -8,6 +8,8 @@ from flask.ext.cors import CORS
 from flask.json import jsonify
 import json
 import os
+import urllib
+import base64
 
 app = Flask(__name__, static_url_path='')
 CORS(app)
@@ -31,7 +33,11 @@ def twitter():
     fp = os.path.join(SITE_ROOT, 'config.json')
     with open(fp) as data_file:
         config = json.load(data_file)
-    return jsonify(config)
+    key = urllib.quote_plus(config['key'])
+    secret = urllib.quote_plus(config['secret'])
+    concat = key + ":" + secret
+    bs64 = base64.b64encode(concat)
+    return jsonify({'base64':bs64})
 
 if __name__ == "__main__":
     app.debug = True
