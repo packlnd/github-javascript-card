@@ -33,11 +33,21 @@ def twitter():
     fp = os.path.join(SITE_ROOT, 'config.json')
     with open(fp) as data_file:
         config = json.load(data_file)
-    key = urllib.quote_plus(config['key'])
-    secret = urllib.quote_plus(config['secret'])
-    concat = key + ":" + secret
-    bs64 = base64.b64encode(concat)
-    return jsonify({'base64':bs64})
+    #key = urllib.quote_plus(config['key'])
+    #secret = urllib.quote_plus(config['secret'])
+    #concat = key + ":" + secret
+    #bs64 = base64.b64encode(concat)
+    response = requests.post(
+        #'https://website.com/id',
+        'https://api.twitter.com/oauth2/token',
+        data='grant_type=client_credentials',
+        headers={
+            'Authorization': 'Basic ' + config['base64'],
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+
+        }
+    )
+    return jsonify(response)
 
 if __name__ == "__main__":
     app.debug = True
