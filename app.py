@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request
+from flask import Flask, url_for, make_response, request, current_app
 from datetime import timedelta
-from flask import make_response, request, current_app
 from functools import update_wrapper
 import requests
 from lxml import html
@@ -27,7 +26,7 @@ def index():
 @app.route('/twitter')
 def twitter():
     config = None
-    with open(url_for('static', 'config.json')) as data_file:
+    with open(url_for('static', filename='config.json')) as data_file:
         config = json.load(data_file)
     return config
 
