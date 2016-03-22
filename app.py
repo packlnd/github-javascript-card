@@ -6,6 +6,7 @@ import requests
 from lxml import html
 from flask.ext.cors import CORS
 from flask.json import jsonify
+from util import get_auth, get_token, get_user_data
 import json
 import os
 import urllib
@@ -28,26 +29,10 @@ def index():
 
 @app.route('/twitter')
 def twitter():
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    config = None
-    fp = os.path.join(SITE_ROOT, 'config.json')
-    with open(fp) as data_file:
-        config = json.load(data_file)
-    #key = urllib.quote_plus(config['key'])
-    #secret = urllib.quote_plus(config['secret'])
-    #concat = key + ":" + secret
-    #bs64 = base64.b64encode(concat)
-    response = requests.post(
-        #'https://website.com/id',
-        'https://api.twitter.com/oauth2/token',
-        data='grant_type=client_credentials',
-        headers={
-            'Authorization': 'Basic ' + config['base64'],
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-
-        }
-    )
-    return jsonify(response)
+    auth = get_auth()
+    token = get_token(auth)
+    data = get_user_data('vincentmvdm', token)
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.debug = True
