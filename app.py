@@ -19,7 +19,7 @@ def index():
 def twitter():
     auth = get_auth()
     token = get_token(auth)
-    data = get_user_data(request.args['screen_name'], token)
+    data = get_user_data(request.args.get('screen_name', ''), token)
     return jsonify(data)
 
 if __name__ == "__main__":
