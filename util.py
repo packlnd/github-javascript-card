@@ -25,8 +25,7 @@ def get_token(auth):
 
 
 def get_user_data(uname, token):
-    response = requests.get('https://api.twitter.com/1.1/users/show.json',
-        data= {'screen_name':uname},
+    response = requests.get('https://api.twitter.com/1.1/users/show.json?screen_name' + uname,
         headers={
             'Authorization': 'Bearer ' + token
         }
