@@ -69,7 +69,7 @@ $(function() {
                 "Followers")
             .css("left", 250);
         var ico = $("<img/>", {
-            src : "http://packlnd.github.io/icon.ico"
+            src : "http://packlnd.github.io/github.ico"
             })
             .css("position", "absolute")
             .css("top", 5)
