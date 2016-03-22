@@ -7,10 +7,6 @@ from lxml import html
 from flask.ext.cors import CORS
 from flask.json import jsonify
 from util import get_auth, get_token, get_user_data
-import json
-import os
-import urllib
-import base64
 
 app = Flask(__name__, static_url_path='')
 CORS(app)

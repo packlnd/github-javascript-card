@@ -1,3 +1,9 @@
+import json
+import os
+import urllib
+import base64
+import requests
+
 def get_auth():
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     config = None
