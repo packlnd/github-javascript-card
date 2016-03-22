@@ -3,6 +3,13 @@ import os
 import urllib
 import base64
 import requests
+from lxml import html
+
+def get_streak(uname):
+    page = requests.get('https://github.com/' + uname)
+    tree = html.fromstring(page.content)
+    streak = tree.xpath('//span[@class="contrib-number"]/text()')
+    return streak[2].split(" ")[0]
 
 def get_auth():
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))

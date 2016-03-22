@@ -2,20 +2,12 @@
 from flask import Flask, url_for, make_response, request, current_app
 from datetime import timedelta
 from functools import update_wrapper
-import requests
-from lxml import html
 from flask.ext.cors import CORS
 from flask.json import jsonify
-from util import get_auth, get_token, get_user_data
+from util import get_auth, get_token, get_user_data, get_streak
 
 app = Flask(__name__, static_url_path='')
 CORS(app)
-
-def get_streak(uname):
-    page = requests.get('https://github.com/' + uname)
-    tree = html.fromstring(page.content)
-    streak = tree.xpath('//span[@class="contrib-number"]/text()')
-    return streak[2].split(" ")[0]
 
 @app.route('/')
 def index():
