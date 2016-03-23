@@ -29,18 +29,11 @@ def yelp():
     bid = request.args.get('bid','')
     client = get_yelp_client()
     b = client.get_business(bid).business
-          #data['image_url'],
-          #data['name'],
-          #data['rating'],
-          #'#c41200',
-          #false,'','',data['review_count'],"Reviews",
-          #false,'','',data['review_count'],"Reviews",
-          #false,'','',data['review_count'],"Reviews",
     return jsonify({
         'image_url': b.image_url,
         'name': b.name,
         'city': b.location.city,
-        'category': b.categories[0][0],
+        'num_deals': len(b.deals),
         'rating': b.rating,
         'review_count': b.review_count
     })

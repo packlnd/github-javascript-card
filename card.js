@@ -20,7 +20,7 @@ $(function() {
           '#c41200',
           false,'','',data['rating'],"Rating",
           false,'','',data['review_count'],"Reviews",
-          false,'','',data['category'],"Category",
+          false,'','',data['num_deals'],"Deals",
           0.2,
           'http://packlnd.github.io/yelp.png'
         );
