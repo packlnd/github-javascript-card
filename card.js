@@ -1,10 +1,55 @@
 $(function() {
-  if ($("#card.twitter").length) { create_twitter_card(); }
-  if ($("#card.github").length) { create_github_card(); }
-  if ($("#card.yelp").length) { create_yelp_card(); }
+  if ($("#twitter-card").length) { create_twitter_card(); }
+  if ($("#github-card").length) { create_github_card(); }
+  //if ($("#yelp-card").length) { create_yelp_card(); }
+
+  var LEFT = [122,186,250];
+
+  function create_yelp_card() {
+    var bid = $("#yelp-card").html();
+    $.get({
+      url: "https://api.yelp.com/v2/business/" + bid,
+      success: function(data) {
+        var yelp = prepare_obj(
+          data['image_url'],
+          data['name'],
+          data['rating'],
+          '#c41200',
+          false,'','',data['review_count'],"Reviews",
+          false,'','',data['review_count'],"Reviews",
+          false,'','',data['review_count'],"Reviews",
+          0.2,
+          'http://packlnd.github.io/yelp.png'
+        );
+        draw_card($("#yelp-card"), yelp);
+      }
+    });
+  }
+
+  function create_twitter_card() {
+    var sname = $("#twitter-card").html();
+    $.get({
+      url: "https://shrouded-oasis-42259.herokuapp.com/twitter",
+      data: {'screen_name': sname},
+      success: function(data) {
+        var twitter = prepare_obj(
+          data['profile_image_url'].replace('_normal',''),
+          data['name'],
+          data['screen_name'],
+          "#"+data['profile_link_color'],
+          false,'','',data['statuses_count'],'Tweets',
+          false,'','',data['followers_count'],'Followers',
+          false,'','',data['friends_count'],'Following',
+          0.2,
+          'http://packlnd.github.io/twitter.ico'
+        );
+        draw_card($("#twitter-card"), twitter);
+      }
+    });
+  }
 
   function create_github_card() {
-    uname = $("#card.github").html();
+    uname = $("#github-card").html();
     var url = "https://api.github.com/users/" + uname;
     $.getJSON({
       url: url,
@@ -14,35 +59,20 @@ $(function() {
           data['name'],
           data['login'],
           'rgb(64,120,192)',
-          false,
-          '',
-          '',
-          data['public_repos'],
-          'Repositories',
-          122,
-          true,
-          'https://shrouded-oasis-42259.herokuapp.com',
-          data['login'],
-          '',
-          'Streak',
-          186,
-          false,
-          '',
-          '',
-          data['followers'],
-          'Followers',
-          250,
+          false,'','',data['public_repos'],'Repositories',
+          true,'https://shrouded-oasis-42259.herokuapp.com',data['login'],'','Streak',
+          false,'','',data['followers'],'Followers',
           0.1,
           'http://packlnd.github.io/github.ico'
         );
-        draw_card($("#card.github"), github);
+        draw_card($("#github-card"), github);
       }
     });
   }
 
   function draw_card(card, data) {
-    card.html("");
     card
+      .html("")
       .width(300)
       .height(100)
       .css("font-family", "Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'")
@@ -71,13 +101,14 @@ $(function() {
       .css("top", 38)
       .css("left", 122)
       .css("margin",0)
-      .css("font-size","14px")
+      .css("font-size","12px")
       .css("color", "#666");
     $.each(data['stats']['items'], function(i,v) {
       if (v['from_server']) {
-        fetch_from_server(card, v, data['stats']['color']);
+        fetch_from_server(card, v, data['stats']['color'], i);
       } else {
-        var div = create_stats_div(card, v['number'], v['text'], data['stats']['color'], v['left']);
+        color = data['stats']['color'];
+        var div = create_stats_div(card, v['number'], v['text'], color, i);
         card.append(div);
       }
     });
@@ -96,10 +127,10 @@ $(function() {
       .append(ico);
   }
 
-  function create_stats_div(card, number, text, color, left) {
+  function create_stats_div(card, number, text, color, i) {
     var container = $("<div>")
       .css("top",65)
-      .css('left',left)
+      .css('left',LEFT[i])
       .width(64)
       .css("position","absolute");
     var num = $("<h3>")
@@ -125,12 +156,12 @@ $(function() {
     return name.slice(0,14) + "...";
   }
 
-  function fetch_from_server(card, item, color) {
+  function fetch_from_server(card, item, color, i) {
     $.get({
       url: item['url'],
       data: {'uname': item['data']},
       success: function(obj) {
-        var div = create_stats_div(card, obj['data'],item['text'], color, item['left']);
+        var div = create_stats_div(card, obj['data'],item['text'], color, i);
         card.append(div);
       }
     });
@@ -138,9 +169,9 @@ $(function() {
 
   function prepare_obj(
       img,nm,unm,clr,
-      fs1,u1,d1,n1,t1,l1,
-      fs2,u2,d2,n2,t2,l2,
-      fs3,u3,d3,n3,t3,l3,
+      fs1,u1,d1,n1,t1,
+      fs2,u2,d2,n2,t2,
+      fs3,u3,d3,n3,t3,
       io,ii) {
     return {
       'img': img,
@@ -153,22 +184,19 @@ $(function() {
           'url': u1,
           'data': d1,
           'number': n1,
-          'text': t1,
-          'left': l1
+          'text': t1
         },{
           'from_server': fs2,
           'url': u2,
           'data': d2,
           'number': n2,
-          'text': t2,
-          'left': l2
+          'text': t2
         },{
           'from_server': fs3,
           'url': u3,
           'data': d3,
           'number': n3,
-          'text': t3,
-          'left': l3
+          'text': t3
         }]
       },
       'icon': {
