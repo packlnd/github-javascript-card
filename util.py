@@ -4,6 +4,8 @@ import urllib
 import base64
 import requests
 from lxml import html
+from yelp.client import Client
+from yelp.oauth1_authenticator import Oauth1Authenticator
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 fp = os.path.join(SITE_ROOT, 'config.json')
@@ -15,7 +17,7 @@ def get_github_streak(uname):
     return streak[2].split(" ")[0]
 
 def get_yelp_client():
-    with io.open('config.json') as cred:
+    with open(fp) as cred:
         creds = json.load(cred)
         auth = Oauth1Authenticator(**creds['yelp'])
         client = Client(auth)
@@ -23,7 +25,7 @@ def get_yelp_client():
 
 def get_twitter_auth():
     config = None
-    with open(fp) as cred_:
+    with open(fp) as cred:
         config = json.load(cred)
     return config['twitter']['base64']
 

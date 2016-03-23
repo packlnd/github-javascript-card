@@ -4,7 +4,9 @@ from datetime import timedelta
 from functools import update_wrapper
 from flask.ext.cors import CORS
 from flask.json import jsonify
-from util import get_auth, get_token, get_user_data, get_streak, yelp_oauth_client
+from util import get_twitter_auth, get_twitter_token, get_twitter_user_data, get_github_streak, get_yelp_client
+import yaml
+import json
 
 app = Flask(__name__, static_url_path='')
 CORS(app)
@@ -26,9 +28,20 @@ def twitter():
 def yelp():
     bid = request.args.get('bid','')
     client = get_yelp_client()
-    data = client.get_business(bid)
-    print data
-    return data
+    b = client.get_business(bid).business
+          #data['image_url'],
+          #data['name'],
+          #data['rating'],
+          #'#c41200',
+          #false,'','',data['review_count'],"Reviews",
+          #false,'','',data['review_count'],"Reviews",
+          #false,'','',data['review_count'],"Reviews",
+    return jsonify({
+        'image_url': b.image_url,
+        'name': b.name,
+        'rating': b.rating,
+        'review_count': b.review_count
+    })
 
 if __name__ == "__main__":
     app.debug = True
