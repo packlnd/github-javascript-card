@@ -5,21 +5,29 @@ import base64
 import requests
 from lxml import html
 
-def get_streak(uname):
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+fp = os.path.join(SITE_ROOT, 'config.json')
+
+def get_github_streak(uname):
     page = requests.get('https://github.com/' + uname)
     tree = html.fromstring(page.content)
     streak = tree.xpath('//span[@class="contrib-number"]/text()')
     return streak[2].split(" ")[0]
 
-def get_auth():
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    config = None
-    fp = os.path.join(SITE_ROOT, 'config.json')
-    with open(fp) as data_file:
-        config = json.load(data_file)
-    return config['base64']
+def get_yelp_client():
+    with io.open('config.json') as cred:
+        creds = json.load(cred)
+        auth = Oauth1Authenticator(**creds['yelp'])
+        client = Client(auth)
+    return client
 
-def get_token(auth):
+def get_twitter_auth():
+    config = None
+    with open(fp) as cred_:
+        config = json.load(cred)
+    return config['twitter']['base64']
+
+def get_twitter_token(auth):
     response = requests.post(
         'https://api.twitter.com/oauth2/token',
         data='grant_type=client_credentials',
@@ -30,8 +38,7 @@ def get_token(auth):
     )
     return response.json()['access_token']
 
-
-def get_user_data(uname, token):
+def get_twitter_user_data(uname, token):
     response = requests.get('https://api.twitter.com/1.1/users/show.json?screen_name=' + uname,
         headers={
             'Authorization': 'Bearer ' + token
