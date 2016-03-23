@@ -1,7 +1,7 @@
 $(function() {
   var LEFT = [122,186,250];
-  var SERVER = 'https://shrouded-oasis-42259.herokuapp.com';
-  //var SERVER = 'http://localhost:5000';
+  //var SERVER = 'https://shrouded-oasis-42259.herokuapp.com';
+  var SERVER = 'http://localhost:5000';
 
   if ($("#twitter-card").length) { create_twitter_card(); }
   if ($("#github-card").length) { create_github_card(); }
@@ -37,8 +37,8 @@ $(function() {
       success: function(data) {
         var twitter = prepare_obj(
           data['profile_image_url'].replace('_normal',''),
-          '@'+data['name'],
-          data['screen_name'],
+          data['name'],
+          '@'+data['screen_name'],
           "#"+data['profile_link_color'],
           false,'','',data['statuses_count'],'Tweets',
           false,'','',data['followers_count'],'Followers',
