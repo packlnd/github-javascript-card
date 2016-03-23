@@ -1,11 +1,11 @@
 $(function() {
   var LEFT = [122,186,250];
-  var SERVER = 'https://shrouded-oasis-42259.herokuapp.com';
-  //var SERVER = 'http://localhost:5000';
+  //var SERVER = 'https://shrouded-oasis-42259.herokuapp.com';
+  var SERVER = 'http://localhost:5000';
 
   if ($("#twitter-card").length) { create_twitter_card(); }
-  //if ($("#github-card").length) { create_github_card(); }
-  //if ($("#yelp-card").length) { create_yelp_card(); }
+  if ($("#github-card").length) { create_github_card(); }
+  if ($("#yelp-card").length) { create_yelp_card(); }
 
   function create_yelp_card() {
     var bid = $("#yelp-card").html();
@@ -16,11 +16,11 @@ $(function() {
         var yelp = prepare_obj(
           data['image_url'],
           data['name'],
-          data['rating'],
+          data['city'],
           '#c41200',
+          false,'','',data['rating'],"Rating",
           false,'','',data['review_count'],"Reviews",
-          false,'','',data['review_count'],"Reviews",
-          false,'','',data['review_count'],"Reviews",
+          false,'','',data['category'],"Category",
           0.2,
           'http://packlnd.github.io/yelp.png'
         );

@@ -39,6 +39,8 @@ def yelp():
     return jsonify({
         'image_url': b.image_url,
         'name': b.name,
+        'city': b.location.city,
+        'category': b.categories[0][0],
         'rating': b.rating,
         'review_count': b.review_count
     })
