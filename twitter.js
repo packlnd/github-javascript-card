@@ -13,7 +13,7 @@ $(function() {
         var card = $("#twitter-card")
             .width(300).height(100)
             .css("font-family", "Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'")
-            .css("background-color", '#'+data['profile_background_color'])
+            .css("background-color", "#EEE")
             .css("border", "solid 1px #D3D3D3")
             .css("border-radius", "3px")
             .css("position", "relative")
@@ -47,6 +47,16 @@ $(function() {
                 "Tweets")
             .css("left", 122)
             .css("color", "#"+data['profile_link_color']);
+        var followers = create_stats_div(
+                data['followers_count'],
+                "Followers")
+            .css("left", 186)
+            .css("color", "#"+data['profile_link_color']);
+        var following = create_stats_div(
+                data['friends_count'],
+                "Following")
+            .css("left", 250)
+            .css("color", "#"+data['profile_link_color']);
         var ico = $("<img/>", {
             src : "http://packlnd.github.io/twitter.ico"
             })
@@ -59,6 +69,8 @@ $(function() {
             .append(name)
             .append(uname)
             .append(tweets)
+            .append(followers)
+            .append(following)
             .append(ico);
     }
 
@@ -67,7 +79,7 @@ $(function() {
             .css("top",65)
             .width(64)
             .css("position","absolute");
-        var num = $("<h3>")
+        var num = $("<h4>")
             .html(n)
             //.css("color", "rgb(64,120,192)")
             .css("text-align", "center")
