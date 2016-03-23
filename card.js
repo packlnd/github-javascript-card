@@ -1,14 +1,17 @@
 $(function() {
+  var LEFT = [122,186,250];
+  //var SERVER = 'https://shrouded-oasis-42259.herokuapp.com';
+  var SERVER = 'http://localhost:5000';
+
   if ($("#twitter-card").length) { create_twitter_card(); }
   if ($("#github-card").length) { create_github_card(); }
-  //if ($("#yelp-card").length) { create_yelp_card(); }
-
-  var LEFT = [122,186,250];
+  if ($("#yelp-card").length) { create_yelp_card(); }
 
   function create_yelp_card() {
     var bid = $("#yelp-card").html();
     $.get({
-      url: "https://api.yelp.com/v2/business/" + bid,
+      url: SERVER + '/yelp',
+      data: {'bid': bid},
       success: function(data) {
         var yelp = prepare_obj(
           data['image_url'],
@@ -29,7 +32,7 @@ $(function() {
   function create_twitter_card() {
     var sname = $("#twitter-card").html();
     $.get({
-      url: "https://shrouded-oasis-42259.herokuapp.com/twitter",
+      url: SERVER + '/twitter',
       data: {'screen_name': sname},
       success: function(data) {
         var twitter = prepare_obj(
@@ -60,7 +63,7 @@ $(function() {
           data['login'],
           'rgb(64,120,192)',
           false,'','',data['public_repos'],'Repositories',
-          true,'https://shrouded-oasis-42259.herokuapp.com',data['login'],'','Streak',
+          true,SERVER,data['login'],'','Streak',
           false,'','',data['followers'],'Followers',
           0.1,
           'http://packlnd.github.io/github.ico'
