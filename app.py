@@ -33,7 +33,7 @@ def yelp():
         'image_url': b.image_url,
         'name': b.name,
         'city': b.location.city,
-        'num_deals': len(b.deals),
+        'verified': 'Yes' if b.is_claimed else 'No',
         'rating': b.rating,
         'review_count': b.review_count
     })
