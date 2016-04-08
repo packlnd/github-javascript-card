@@ -6,6 +6,7 @@ $(function() {
   if ($("#twitter-card").length) { create_twitter_card(); }
   if ($("#github-card").length) { create_github_card(); }
   if ($("#yelp-card").length) { create_yelp_card(); }
+  if ($("#goodreads-card").length) { create_goodreads_card(); }
 
   function create_yelp_card() {
     var bid = $("#yelp-card").html();
