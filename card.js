@@ -8,6 +8,10 @@ $(function() {
   if ($("#yelp-card").length) { create_yelp_card(); }
   if ($("#goodreads-card").length) { create_goodreads_card(); }
 
+  function create_goodreads_Card() {
+  
+  }
+
   function create_yelp_card() {
     var bid = $("#yelp-card").html();
     $.get({
