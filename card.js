@@ -9,7 +9,7 @@ $(function() {
   if ($("#goodreads-card").length) { create_goodreads_card(); }
 
   function create_goodreads_Card() {
-  
+    var uid = $().html();
   }
 
   function create_yelp_card() {
