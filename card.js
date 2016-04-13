@@ -10,6 +10,9 @@ $(function() {
 
   function create_goodreads_Card() {
     var uid = $().html();
+    $.get({
+    
+    });
   }
 
   function create_yelp_card() {
