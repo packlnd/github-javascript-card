@@ -1,7 +1,7 @@
 $(function() {
   var LEFT = [122,186,250];
-  var SERVER = 'https://shrouded-oasis-42259.herokuapp.com';
-  //var SERVER = 'http://localhost:5000';
+  //var SERVER = 'https://shrouded-oasis-42259.herokuapp.com';
+  var SERVER = 'http://localhost:5000';
 
   if ($("#twitter-card").length) { create_twitter_card(); }
   if ($("#github-card").length) { create_github_card(); }
@@ -9,9 +9,13 @@ $(function() {
   if ($("#goodreads-card").length) { create_goodreads_card(); }
 
   function create_goodreads_Card() {
-    var uid = $().html();
+    var uid = $("#goodreads-card").html();
     $.get({
-    
+      url: SERVER + '/goodreads',
+      data: {'uid': uid},
+      success: function(data) {
+
+      }
     });
   }
 
