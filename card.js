@@ -14,7 +14,18 @@ $(function() {
       url: SERVER + '/goodreads',
       data: {'uid': uid},
       success: function(data) {
-
+        var greads = prepare_obj(
+          data['image'],
+          data['name'],
+          'Last month active: ' + data['active'],
+          '#743901',
+          false,'','',data['shelves'][0]['count'],data['shelves'][0]['name'],
+          false,'','',data['shelves'][1]['count'],data['shelves'][1]['name'],
+          false,'','',data['shelves'][2]['count'],data['shelves'][2]['name'],
+          0.2,
+          'http://deliberatereader.com/wp-content/uploads/2012/08/goodreads.png'
+        );
+        draw_card($("#goodreads-card"), greads);
       }
     });
   }

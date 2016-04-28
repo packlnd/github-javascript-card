@@ -6,6 +6,7 @@ import requests
 from lxml import html
 from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
+from xml.etree import ElementTree
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 fp = os.path.join(SITE_ROOT, 'config.json')
@@ -17,8 +18,27 @@ def get_goodreads_data(uid):
     return xml_to_json(data)
 
 def xml_to_json(data):
-    print data.json()
-    raise NotImplementedError
+    root = ElementTree.fromstring(data.content)
+    user = root[1]
+    shelves = user[21]
+    data = {
+        'name': user[1].text,
+        'image': user[4].text,
+        'active': user[12].text,
+        'shelves': [{
+                'name': shelves[0][1].text,
+                'count': shelves[0][2].text
+            },{
+                'name': shelves[1][1].text,
+                'count': shelves[1][2].text
+            },{
+                'name': shelves[2][1].text,
+                'count': shelves[2][2].text
+            }
+        ]
+    }
+    print data
+    return data
 
 def get_github_streak(uname):
     page = requests.get('https://github.com/' + uname)
