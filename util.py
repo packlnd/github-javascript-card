@@ -17,6 +17,7 @@ def get_goodreads_data(uid):
     return xml_to_json(data)
 
 def xml_to_json(data):
+    print data
     raise NotImplementedError
 
 def get_github_streak(uname):
