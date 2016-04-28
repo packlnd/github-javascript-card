@@ -37,7 +37,6 @@ def xml_to_json(data):
             }
         ]
     }
-    print data
     return data
 
 def get_github_streak(uname):
