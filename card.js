@@ -23,7 +23,7 @@ $(function() {
           false,'','',data['shelves'][1]['count'],format(data['shelves'][1]['name']),
           false,'','',data['shelves'][2]['count'],format(data['shelves'][2]['name']),
           0.2,
-          'http://deliberatereader.com/wp-content/uploads/2012/08/goodreads.png'
+          'http://packlnd.github.io/goodreads.png'
         );
         draw_card($("#goodreads-card"), greads);
       }
