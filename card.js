@@ -9,6 +9,7 @@ $(function() {
   if ($("#goodreads-card").length) { create_goodreads_card(); }
 
   function create_goodreads_card() {
+    set_loading($("#"));
     var uid = $("#goodreads-card").html();
     $.get({
       url: SERVER + '/goodreads',
@@ -36,6 +37,7 @@ $(function() {
   }
 
   function create_yelp_card() {
+    set_loading($("#"));
     var bid = $("#yelp-card").html();
     $.get({
       url: SERVER + '/yelp',
@@ -58,6 +60,7 @@ $(function() {
   }
 
   function create_twitter_card() {
+    set_loading($("#"));
     var sname = $("#twitter-card").html();
     $.get({
       url: SERVER + '/twitter',
@@ -80,6 +83,7 @@ $(function() {
   }
 
   function create_github_card() {
+    set_loading($("#"));
     uname = $("#github-card").html();
     var url = "https://api.github.com/users/" + uname;
     $.getJSON({
