@@ -9,7 +9,7 @@ $(function() {
   if ($("#goodreads-card").length) { create_goodreads_card(); }
 
   function create_goodreads_card() {
-    set_loading($("#"));
+    set_loading($("#goodreads-card"));
     var uid = $("#goodreads-card").html();
     $.get({
       url: SERVER + '/goodreads',
@@ -37,8 +37,8 @@ $(function() {
   }
 
   function create_yelp_card() {
-    set_loading($("#"));
     var bid = $("#yelp-card").html();
+    set_loading($("#yelp-card"));
     $.get({
       url: SERVER + '/yelp',
       data: {'bid': bid},
@@ -60,8 +60,8 @@ $(function() {
   }
 
   function create_twitter_card() {
-    set_loading($("#"));
     var sname = $("#twitter-card").html();
+    set_loading($("#twitter-card"));
     $.get({
       url: SERVER + '/twitter',
       data: {'screen_name': sname},
@@ -83,8 +83,8 @@ $(function() {
   }
 
   function create_github_card() {
-    set_loading($("#"));
     uname = $("#github-card").html();
+    set_loading($("#github-card"));
     var url = "https://api.github.com/users/" + uname;
     $.getJSON({
       url: url,
@@ -108,12 +108,12 @@ $(function() {
   function draw_card(card, data) {
     card
       .html("")
-      .width(300)
-      .height(100)
-      .css("font-family", "Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'")
-      .css("background-color", "#EEE")
-      .css("border", "solid 1px #D3D3D3")
-      .css("border-radius", "3px")
+      //.width(300)
+      //.height(100)
+      //.css("font-family", "Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'")
+      //.css("background-color", "#EEE")
+      //.css("border", "solid 1px #D3D3D3")
+      //.css("border-radius", "3px")
       .css("position", "relative")
       .css("z-index", -2)
       .css("padding", 10);
@@ -200,6 +200,17 @@ $(function() {
         card.append(div);
       }
     });
+  }
+
+  function set_loading(card) {
+    card
+      .html("Loading...")
+      .width(300)
+      .height(100)
+      .css("font-family", "Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'")
+      .css("background-color", "#EEE")
+      .css("border", "solid 1px #D3D3D3")
+      .css("border-radius", "3px")
   }
 
   function prepare_obj(
